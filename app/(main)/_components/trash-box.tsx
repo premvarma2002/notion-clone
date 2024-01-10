@@ -1,5 +1,6 @@
 "use client"
 
+import { ConfirmModal } from "@/components/modals/confirm-modal";
 import { Spinner } from "@/components/spinner";
 import { Input } from "@/components/ui/input";
 import { api } from "@/convex/_generated/api";
@@ -99,12 +100,14 @@ if (documents === undefined) {
                     >
                    <Undo size={17} className="text-muted-foreground"/>
                     </div>
+                    <ConfirmModal onConfirm={() => onRemove(document._id)}>
                     <div
                     role="button"
                     className="rounded-sm p-2 hover:bg-neutral-200"
                     >
                         <Trash className="h-4 w-4 text-muted-foreground"/>
                     </div>
+                    </ConfirmModal>
                    </div>
                 </div>
               ))}
