@@ -18,6 +18,7 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { useUser } from "@clerk/clerk-react";
+import React from "react";
 interface ItemProps {
   id?: Id<"documents">;
   documentIcon?: string;
@@ -45,8 +46,22 @@ export const Item = ({
 }: ItemProps) => {
   const { user } = useUser();
   const router = useRouter();
-
   const create = useMutation(api.documents.create);
+  const archive = useMutation(api.documents.archive);
+
+  const onArchive = (
+     event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+    if (!id) return;
+    const promise = archive({  id });
+
+    toast.promise(promise,{
+      loading: "Moving to trash...",
+      success: "Moved to trash...",
+      error: "Failed to archive note"
+    });
+  };
 
   const handleExpand = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -128,7 +143,7 @@ export const Item = ({
             side="right"
             forceMount
             >
-             <DropdownMenuItem onClick={() => {}}>
+             <DropdownMenuItem onClick={onArchive}>
               <Trash className="h-4 w-4 mr-2"/>
                  Delete
              </DropdownMenuItem>
