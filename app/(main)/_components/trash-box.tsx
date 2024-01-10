@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
-import { Search } from "lucide-react";
+import { Search, Trash, Undo } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -81,6 +81,33 @@ if (documents === undefined) {
               <p className="hidden last:block text-xs text-center text-muted-foreground pb-2">
                 no documents found.
               </p>
+              {filteredDocuments?.map((document) => (
+                <div
+                key={document._id}
+                role="button"
+                onClick={() => onClick(document._id)}
+                className="text-sm rounded-sm w-full hover:bg-primary/5 flex items-center text-primary justify-between"
+                >
+                   <span className="truncate pl-2">
+                    {document.title}
+                   </span>
+                   <div className="flex items-center">
+                    <div
+                    onClick={(e) => onRestore(e, document._id)}
+                    role="button"
+                    className="rounded-sm p-2 hover:bg-neutral-200"
+                    >
+                   <Undo size={17} className="text-muted-foreground"/>
+                    </div>
+                    <div
+                    role="button"
+                    className="rounded-sm p-2 hover:bg-neutral-200"
+                    >
+                        <Trash className="h-4 w-4 text-muted-foreground"/>
+                    </div>
+                   </div>
+                </div>
+              ))}
             </div>
         </div>
     )
