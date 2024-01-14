@@ -15,6 +15,7 @@ import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal, Trash } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface MenuProps {
     documentId: Id<"documents">;
@@ -26,15 +27,15 @@ export const Menu = ( {
    const router = useRouter();
    const { user } = useUser();
 
-   const archieve = useMutation(api.documents.archieve);
+   const archive = useMutation(api.documents.archive);
 
-   const onArchieve = () => {
-    const promise = archieve({id: documentId})
+   const onArchive = () => {
+    const promise = archive({id: documentId})
 
     toast.promise(promise, {
         loading: "Moving to trash...",
         success:"Note moved to trash!",
-        error:"Failed to archieve."
+        error:"Failed to archive."
     });
 
     router.push("/documents");
@@ -48,7 +49,7 @@ export const Menu = ( {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-60" align="end" alignOffset={8} forceMount>
-         <DropdownMenuItem onClick={onArchieve}>
+         <DropdownMenuItem onClick={onArchive}>
             <Trash className="h-4 w-4 mr-2"/>
             Delete
             </DropdownMenuItem>   
@@ -58,5 +59,11 @@ export const Menu = ( {
             </div>
         </DropdownMenuContent>
     </DropdownMenu>
+  );
+};
+
+Menu.Skeleton = function MenuSkeleton() {
+  return (
+    <Skeleton className="h-10 w-10" />
   )
 }
