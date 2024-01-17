@@ -45,7 +45,7 @@ export const Menu = ( {
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm">
-            <MoreHorizontal className="h-4 w-4"/>
+            <MoreHorizontal className="h-4 w-4 dark:text-white"/>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-60" align="end" alignOffset={8} forceMount>

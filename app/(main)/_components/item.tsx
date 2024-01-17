@@ -59,12 +59,13 @@ export const Item = ({
   const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
     if (!id) return;
-    const promise = archive({ id });
+    const promise = archive({ id })
+      .then(() => router.push("/documents"))
 
     toast.promise(promise, {
       loading: "Moving to trash...",
-      success: "Moved to trash...",
-      error: "Failed to archive note",
+      success: "Note moved to trash!",
+      error: "Failed to archive note."
     });
   };
 
@@ -75,22 +76,23 @@ export const Item = ({
     onExpand?.();
   };
 
-  const onCreate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const onCreate = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
     event.stopPropagation();
     if (!id) return;
-    const promise = create({ title: "Untitled", parentDocument: id }).then(
-      (documentId) => {
+    const promise = create({ title: "Untitled", parentDocument: id })
+      .then((documentId) => {
         if (!expanded) {
           onExpand?.();
         }
-        // router.push(`documents:${documentId}`);
-      }
-    );
+        router.push(`/documents/${documentId}`);
+      });
 
     toast.promise(promise, {
       loading: "Creating a new note...",
       success: "New note created!",
-      error: "Failed to create a new note.",
+      error: "Failed to create a new note."
     });
   };
 
@@ -124,7 +126,7 @@ export const Item = ({
           {documentIcon}
         </div>
       ) : (
-        <Icon className=" shrink-0 h-[18px] mr-2 text-muted-foreground" />
+        <Icon className=" shrink-0 h-[18px] w-[18px] mr-2 text-muted-foreground" />
       )}
       <span className="truncate">{label}</span>
       {isSearch && (
@@ -140,7 +142,7 @@ export const Item = ({
                 role="button"
                 className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 "
               >
-                <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
+                <MoreHorizontal className="h-4 w-4 text-muted-foreground dark:text-white" />
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent

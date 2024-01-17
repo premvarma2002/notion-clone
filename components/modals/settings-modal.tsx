@@ -16,12 +16,12 @@ export const SettingsModal = () => {
         <Dialog open={settings.isOpen} onOpenChange={settings.onClose}>
           <DialogContent>
             <DialogHeader className="border-b pb-3">
-              <h2 className="text-lg font-medium">
+              <h2 className="text-lg font-medium dark:text-white">
                 My settings
               </h2>
             </DialogHeader>
             <div className="flex items-center justify-between">
-              <div className=" flex flex-col gap-y-1">
+              <div className=" flex flex-col gap-y-1 dark:text-white">
                 <Label>
                     Appearance
                 </Label>
