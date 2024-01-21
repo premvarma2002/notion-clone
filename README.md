@@ -5,8 +5,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
-npm run dev ( for our project)
-npx convex dev ( for our database0
+npm i ( install all the needed packages)
+npm run dev ( to launch server)
+npx convex dev ( to launch convex)
 # or
 yarn dev
 # or
