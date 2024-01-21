@@ -7,6 +7,8 @@ First, run the development server:
 ```bash
 npm i ( install all the needed packages)
 npm run dev ( to launch server)
+
+now open another terminal for convex and type
 npx convex dev ( to launch convex)
 # or
 yarn dev
